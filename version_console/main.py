@@ -62,4 +62,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print(main())
+    print(f"randomly generated password: {main()}")
