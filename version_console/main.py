@@ -1,6 +1,6 @@
 import random
 
-
+# class to create a list of random numbers from num1 to num2
 class List_num:
     def __init__(self, num):
         self.num = num
@@ -10,7 +10,7 @@ class List_num:
         list_random = random.sample(list_random, 50)
         return list_random
 
-
+# class to create a list of randomly selected letters from the alphabet
 class List_str:
     def __init__(self, list_str: list):
         self.list_str = list_str
@@ -22,7 +22,7 @@ class List_str:
             latters.append(latter)
         return list(set(latters))
 
-
+# class to create a list of randomly selected special symbols
 class List_char:
     def __init__(self, list_char: list):
         self.list_char = list_char
@@ -34,7 +34,9 @@ class List_char:
             chars.append(char)
         return list(set(chars))
 
-
+"""
+function that requests three list type parameters that has a for bubble that is repeated 50 times to generate each iteration a random password that is added to a list and then a variable randomly selects an index from that list of passwords and returns the variable with the chosen password
+"""
 def password_generator(list_num: list, list_str: list, list_char: list):
     passwords = []
     for i in range(50):
@@ -46,7 +48,9 @@ def password_generator(list_num: list, list_str: list, list_char: list):
     chosen = random.choice(passwords)
     return chosen
 
-
+"""
+main function that calls the classes through variables and returns the function that generates the random passwords and uses the variables as parameters
+"""
 def main():
     num = List_num(random.randint(1, 4000))
     num = num.num_random()
