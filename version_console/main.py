@@ -41,7 +41,7 @@ function that requests three list type parameters that has a for bubble that is 
 def password_generator(list_num: list, list_str: list, list_char: list):
     passwords = []
     for i in range(50):
-        password = f"{random.choice(list_char)}{random.choice(list_num)}{random.choice(list_str)}{random.choice(list_str).upper()}{random.choice(list_str)}{random.choice(list_num)}{random.choice(list_str)}{random.choice(list_str)}{random.choice(list_char)}"
+        password = f"{random.choice(list_char)}{random.choice(list_num)}{random.choice(list_str)}{random.choice(list_char)}{random.choice(list_str).upper()}{random.choice(list_str)}{random.choice(list_num)}{random.choice(list_str)}{random.choice(list_str)}{random.choice(list_char)}"
         if password not in passwords:
             passwords.append(password)
         else:
