@@ -1,3 +1,4 @@
+# version 0.1 
 import random
 
 # class to create a list of random numbers from num1 to num2
