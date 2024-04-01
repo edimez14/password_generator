@@ -1,12 +1,11 @@
 # Password Generator web version
 
-This branch contains the web version of the program that generates random passwords
-
-When you enter the website, you will find a message that will tell you the things you can do on the website
+When you enter the website, you will find a message that will tell you the things you can do on the website.
+The framework I used to create the password generator web page is called reflex dev.
 
 ![screenshot of the password generator](assets/img/cap_1.jpg)
 
-You can see that there is also a theme change button, where you can change from light to dark or from dark to light
+You can see that there is also a theme change button, where you can change from light to dark or from dark to light.
 
 ![screenshot of the password generator](assets/img/cap_2.jpg)
 
