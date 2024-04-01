@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 web_version/
 # .gitignore
+=======
+gui_version/
+version_console/
+# web_version/
+.gitignore
+>>>>>>> web_version
