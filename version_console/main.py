@@ -38,7 +38,7 @@ class List_char:
         return list(set(chars))
 
 """
-function that requests three list type parameters that has a for bubble that is repeated 50 times to generate each iteration a random password that is added to a list and then a variable randomly selects an index from that list of passwords and returns the variable with the chosen password
+function that requests three list type parameters that has a for loop that repeats 50 times to generate in each iteration a random password that is added to a list and then a variable randomly selects an index of that list of passwords and returns the variable with the chosen password
 """
 def password_generator(list_num: list, list_str: list, list_char: list):
     passwords = []
