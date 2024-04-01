@@ -1,5 +1,7 @@
-# version 0.1 
+# version 0.2 
 import random
+import sys
+
 
 # class to create a list of random numbers from num1 to num2
 class List_num:
@@ -67,4 +69,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print(f"randomly generated password: {main()}")
+    main()
