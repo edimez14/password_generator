@@ -2,6 +2,8 @@
 
 In this repository you can find a program that generates passwords completely randomly, randomly selecting from a list that stores the generated passwords. 
 
+The technology I used to generate random passwords is Rendom.
+
 ## Console version
 
 This is the console version of the program, and as you can see in the image, when you run the program what is returned is the main function that prints a randomly generated password in the console.
@@ -14,7 +16,7 @@ Then each class has its method, which is the one that receives the parameters re
 
 ![screenshot of the password generator](assets/img/cap_cv_1.jpg)
 
-we have the password_generator function that requests three list type parameters that has a for loop that repeats 50 times to generate in each iteration a random password that is added to a list and then a variable randomly selects an index of that list of passwords and returns the variable with the chosen password
+we have the password_generator function that requests three list type parameters that has a for loop that repeats 50 times to generate in each iteration a random password that is added to a list and then a variable randomly selects an index of that list of passwords and returns the variable with the chosen password.
 
 ![screenshot of the password generator](assets/img/cap_cv_2.jpg)
 
@@ -26,11 +28,12 @@ The main function will return the password_generator function and the parameters
 
 ## Web version 
 
-When you enter the website, you will find a message that will tell you the things you can do on the website
+When you enter the website, you will find a message that will tell you the things you can do on the website.
+The framework I used to create the password generator web page is called reflex dev.
 
 ![screenshot of the password generator](assets/img/cap_wv_1.jpg)
 
-You can see that there is also a theme change button, where you can change from light to dark or from dark to light
+You can see that there is also a theme change button, where you can change from light to dark or from dark to light.
 
 ![screenshot of the password generator](assets/img/cap_wv_2.jpg)
 
