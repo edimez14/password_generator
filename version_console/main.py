@@ -1,41 +1,25 @@
-# version 0.2 
+# version 0.3 
 import random
 import sys
 sys.path.append('../version_console/')
 
-# class to create a list of random numbers from num1 to num2
-class List_num:
-    def __init__(self, num):
-        self.num = num
+# It is known that it has two methods, where one method is responsible for using the element parameter to return a list of random numbers and the second method uses the element parameter to return a list of random characters.
+class list_elements:
+    def __init__(self, element):
+        self.element = element
 
-    def num_random(self):
-        list_random = set(range(self.num))
-        list_random = random.sample(list_random, 50)
-        return list_random
-
-# class to create a list of randomly selected letters from the alphabet
-class List_str:
-    def __init__(self, list_str: list):
-        self.list_str = list_str
-
-    def select_str(self):
-        latters = []
-        for i in range(5):
-            latter = random.choice(self.list_str)
-            latters.append(latter)
-        return list(set(latters))
-
-# class to create a list of randomly selected special symbols
-class List_char:
-    def __init__(self, list_char: list):
-        self.list_char = list_char
+    def select_num(self):
+        list_num = set(range(self.element))
+        list_num = random.sample(list_num, 50)
+        return list_num
 
     def select_char(self):
         chars = []
         for i in range(5):
-            char = random.choice(self.list_char)
+            char = random.choice(self.element)
             chars.append(char)
         return list(set(chars))
+    
 
 """
 function that requests three list type parameters that has a for loop that repeats 50 times to generate in each iteration a random password that is added to a list and then a variable randomly selects an index of that list of passwords and returns the variable with the chosen password
@@ -52,16 +36,16 @@ def password_generator(list_num: list, list_str: list, list_char: list):
     return chosen
 
 """
-main function that calls the classes through variables and returns the function that generates the random passwords and uses the variables as parameters
+password function that calls the classes through variables and returns the function that generates the random passwords and uses the variables as parameters
 """
-def main():
-    num = List_num(random.randint(1, 4000))
-    num = num.num_random()
+def password():
+    num = list_elements(random.randint(1, 4000))
+    num = num.select_num()
 
-    alphabet = List_str(list("abcdefghijklmnopqrstuvwxyz"))
-    alphabet = alphabet.select_str()
+    alphabet = list_elements(list("abcdefghijklmnopqrstuvwxyz"))
+    alphabet = alphabet.select_char()
 
-    char = List_char(['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<',
+    char = list_elements(['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<',
                       '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~', "¡", "¿", "¿", "¡", "°", "€"])
     char = char.select_char()
 
@@ -69,4 +53,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    password()
