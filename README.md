@@ -13,7 +13,7 @@ When you press the generate password button, the website will display a randomly
 
 You can also copy the password by using the copy button that appears to the right side of the generated password.
 
-![screenshot of the password generator](assets/img/cap_3.jpg)
+![screenshot of the password generator](assets/img/cap-3.jpg)
 
 At the bottom of the page you can see the footer with the version of the project, which is currently v0.2.1.
 
