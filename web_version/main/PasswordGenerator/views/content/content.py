@@ -24,7 +24,7 @@ def content_() -> rx.Component:
                     rx.icon("copy", stroke_width=2),
                     variant="ghost",
                     spacing="10",
-                    on_click=rx.set_clipboard(Text_password.password),
+                    on_click=rx.set_clipboard(Text_password.password), #rx.set_clipboard It is to be able to copy something to the clipboard
                 ),
             ),
             rx.button("generate password", on_click=Text_password.change_password),
