@@ -15,6 +15,6 @@ You can also copy the password by using the copy button that appears to the righ
 
 ![screenshot of the password generator](assets/img/cap_3.jpg)
 
-At the bottom of the page you can see the footer with the version of the project, which is currently v0.2.1
+At the bottom of the page you can see the footer with the version of the project, which is currently v0.2.1.
 
 You can generate the number of passwords you prefer, there is no limit.
