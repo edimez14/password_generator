@@ -13,5 +13,6 @@ def header() -> rx.Component:
                     "https://github.com/edimez14/password_generator/tree/web_version", style={"align_item": "right"}),
         rx.color_mode.button(rx.color_mode.icon()),
         z_index=1,
+        padding="0.3em",
         width="100%",
     )
