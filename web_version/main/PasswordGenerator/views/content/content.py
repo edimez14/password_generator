@@ -104,5 +104,5 @@ def content_() -> rx.Component:
             font_size="2em",
         ),
         width="100%",
-        height="86vh",
+        height="82vh",
     )
