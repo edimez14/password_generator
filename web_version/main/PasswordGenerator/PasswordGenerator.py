@@ -1,26 +1,9 @@
-# Web Application v0.2.1
+# Web Application v0.2.2_develop
 from rxconfig import config
 import reflex as rx
-
-# components
-from PasswordGenerator.components.footer import footer
-
-# views
-from PasswordGenerator.views.header.header import header
-from PasswordGenerator.views.content.content import content_
-    
-class State(rx.State):
-    pass
-
-
-def index() -> rx.Component:
-    return rx.vstack(
-        header(),
-        rx.divider(),
-        content_(),
-        footer(),
-    )
-
+from PasswordGenerator.pages.index import index
+from PasswordGenerator.pages.login.login import login
+from PasswordGenerator.pages.register.register import register
 
 app = rx.App()
 app.add_page(index)

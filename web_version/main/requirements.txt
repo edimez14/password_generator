@@ -1,2 +1,2 @@
-reflex==0.5.2
+reflex==0.6.2
 shellingham==1.5.4
