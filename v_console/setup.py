@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="edimez14_password_generator",
+    name="edimez14_password_generator_1",
     version="0.4",
     description="password generator",
     long_description=open("README.md").read(),
