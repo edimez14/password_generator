@@ -7,7 +7,7 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author="edizon alexander meza leal",
-    author_email="edimez14",
+    author_email="edimez14@gmail.com",
     url="https://github.com/edimez14/password_generator",
     packages=['password_generator'],
     classifiers=[
