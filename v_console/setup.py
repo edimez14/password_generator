@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="password generator",
+    name="password_generator",
     version="0.4",
     description="password generator",
     long_description=open("README.md").read(),
