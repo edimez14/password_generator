@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #c5d0ff;
+  --foreground: #171717;
+}
+
+:root.theme-white {
+  --background: #c5d0ff;
+  --foreground: #171717;
+}
+
+:root.theme-dark {
+  --background: #18181b;
+  --foreground: #ededed;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #18181b;
+    --foreground: #ededed;
+  }
+} */
+
+
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@media (max-width: 720px) {
+  .header-sm {
+      padding-top: 2.5em;
+  }
+}
