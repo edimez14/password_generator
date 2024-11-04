@@ -10,7 +10,7 @@ The `password_generator` package provides an easy way to generate random passwor
 You can install the package using `pip`. Run the following command in your terminal:
 
 ```bash
-pip install edimez14-password-generator==0.4
+pip install edimez14-password-generator-1==0.4
 ```
 
 ## Usage

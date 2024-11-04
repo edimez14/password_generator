@@ -1,14 +1,10 @@
-import subprocess
+from password_generator import password
 from django.http import JsonResponse
 
 
 def response_password(request):
     try:
-        result = subprocess.run(
-            ['python3', '/home/edimez14/Documentos/proyectos/programacion/cross_platform_app/password_generator/v_console/password_generator.py'], 
-            capture_output=True, 
-            text=True
-        )
+        result = password()
         output = result.stdout.strip()
 
         if result.stderr:

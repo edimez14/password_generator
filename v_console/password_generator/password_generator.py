@@ -77,7 +77,6 @@ def password():
     :return: The `password()` function is returning the result of calling the `password_generator()`
     function with the generated `num`, `alphabet`, and `char` elements as arguments. The
     `password_generator()` function is responsible for generating the password based on these elements.
-    The `print()` function is used to display the generated password.
     """
     try:
         num = list_elements(random.randint(51, 4000))
@@ -90,7 +89,7 @@ def password():
                               '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~', "¡", "¿", "¿", "¡", "°", "€"])
         char = char.select_char()
 
-        return print(password_generator(num, alphabet, char))
+        return password_generator(num, alphabet, char)
     except Exception as e:
         return print(f"Error in generating data collection to generate the password -> {e}")
 
