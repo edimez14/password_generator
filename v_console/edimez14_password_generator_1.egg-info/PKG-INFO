@@ -1,9 +1,9 @@
 Metadata-Version: 2.1
 Name: edimez14-password-generator-1
-Version: 0.5
+Version: 0.6
 Summary: password generator
 Home-page: https://github.com/edimez14/password_generator
-Author: edizon
+Author: Edizon Alexander Meza Leal
 Author-email: edimez14@gmail.com
 License: UNKNOWN
 Platform: UNKNOWN
@@ -26,7 +26,7 @@ The `password_generator` package provides an easy way to generate random passwor
 You can install the package using `pip`. Run the following command in your terminal:
 
 ```bash
-pip install edimez14-password-generator-1==0.4
+pip install edimez14-password-generator-1
 ```
 
 ## Usage
