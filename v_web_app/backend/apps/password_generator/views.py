@@ -5,11 +5,10 @@ from django.http import JsonResponse
 def response_password(request):
     try:
         result = password()
-        output = result.stdout.strip()
 
-        if result.stderr:
-            print(f"Error in script: {result.stderr}")
+        if isinstance(result, str) == False:
+            print(f"Error in script: {result}")
 
-        return JsonResponse({"output": output})
+        return JsonResponse({"output": result})
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
