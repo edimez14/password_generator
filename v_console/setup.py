@@ -1,18 +1,18 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="password_generator",
+    name="_password_generator",
     version="0.4",
     description="password generator",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author="edizon alexander meza leal",
+    author="edizon",
     author_email="edimez14@gmail.com",
     url="https://github.com/edimez14/password_generator",
     packages=['password_generator'],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: APACHE 2.0 License",
+        "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.6",
