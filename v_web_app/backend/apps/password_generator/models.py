@@ -11,4 +11,4 @@ class SavedPasswords(models.Model):
     )
 
     def __str__(self):
-        return f"{self.id} - {self.name_pages} (User: {self.user.user_name})"
+        return f"{self.id} - {self.name_pages} (User: {self.user.username})"

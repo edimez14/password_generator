@@ -1,17 +1,14 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-# from apps.password_generator.models import SavedPasswords
 
 
-class Users(models.Model):
-    email = models.EmailField(max_length=200)
-    password = models.CharField(max_length=200)
-    user_name = models.CharField(max_length=200)
-    firt_name = models.CharField(max_length=200, default='', blank=True)
-    last_name = models.CharField(max_length=200, default='', blank=True)
-    number_phone = models.CharField(max_length=10)
-    # saved_passwords = models.ForeignKey(
-    #     SavedPasswords, on_delete=models.CASCADE)
+class Users(AbstractUser):
+    email = models.EmailField(max_length=200, unique=True)
+    first_name = models.CharField(max_length=200, blank=True, default='')
+    last_name = models.CharField(max_length=200, blank=True, default='')
+    number_phone = models.CharField(max_length=10, blank=True, null=True)
+
+    REQUIRED_FIELDS = ['email']
 
     def __str__(self):
-
-        return f"{self.id} user: {self.user_name}"
+        return f"{self.id} user: {self.username}"

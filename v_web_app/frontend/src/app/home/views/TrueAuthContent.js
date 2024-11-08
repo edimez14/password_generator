@@ -7,7 +7,7 @@ import { CopyButton } from '@/app/components/CopyButton';
 
 import { getPassword } from '@/app/utils/Request.api';
 
-export default function Content() {
+export default function TrueAuthContent() {
   const [password, setPassword] = useState("Press the button to generate a password");
 
   const handleOnClick = async () => {
@@ -32,6 +32,11 @@ export default function Content() {
             onClick={handleOnClick}
           >
             generate password
+          </Button>
+          <Button
+            className='p-2 rounded-lg transition-colors duration-200 bg-slate-300 text-zinc-900 hover:text-slate-100 hover:bg-zinc-600'
+          >
+            save
           </Button>
         </div>
       </main>
