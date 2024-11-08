@@ -29,7 +29,7 @@ export default function Footer() {
                     </div>
                     <div>
                         <p>
-                            &copy; 2024 - 2024 all rights reserved v0.2.2
+                            &copy; 2024 - 2024 all rights reserved v0.2.3
                         </p>
                     </div>
                 </div>
