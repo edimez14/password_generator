@@ -12,11 +12,6 @@ import DropDownMenu from "@/app/components/DropDownMenu";
 import "@/app/style/glassmorphism.css";
 
 export default function TrueAuthNavBar() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
 
     return (
         <div className="w-full h-auto header-sm">
@@ -37,14 +32,7 @@ export default function TrueAuthNavBar() {
                     </Button>
                 </Link>
                 <div className="flex space-x-4">
-                    <Button
-                        isIconOnly
-                        onClick={toggleMenu}
-                        className="flex items-center p-0 rounded-lg transition-colors duration-200 bg-slate-300 text-zinc-900 hover:text-slate-100 hover:bg-zinc-900"
-                    >
-                        <RiMenuLine />
-                    </Button>
-                    {isMenuOpen && <DropDownMenu />}
+                    <DropDownMenu />
                     <ThemeToggleButton />
                 </div>
             </header>

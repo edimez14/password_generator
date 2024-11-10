@@ -34,8 +34,7 @@ export default function SignUpRequest() {
             const response = await createUser(formData);
             sessionStorage.setItem('authToken', response.data.access);
             sessionStorage.setItem('refreshToken', response.data.refresh);
-            // localStorage.setItem('authToken', response.data.access);
-            // localStorage.setItem('refreshToken', response.data.refresh);
+            sessionStorage.setItem('user', JSON.stringify(response.data.user));
             window.location.href = "/";
         } catch (error) {
             if (error.response && error.response.data) {

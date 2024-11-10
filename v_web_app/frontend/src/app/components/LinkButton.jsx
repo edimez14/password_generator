@@ -9,6 +9,7 @@ export default function LinkButton({
     size = "",
     isExternal = true,
     sm = false,
+    wFull = false,
 }) {
     return (
         <Link
@@ -20,7 +21,8 @@ export default function LinkButton({
         >
             <Button
                 className={
-                    "flex justify-between items-center p-2 rounded-lg transition-colors duration-200 bg-slate-300 text-zinc-900 hover:text-slate-100 hover:bg-zinc-900"
+                    !wFull ? "flex justify-center items-center p-2 rounded-lg transition-colors duration-200 bg-slate-300 text-zinc-900 hover:text-slate-100 hover:bg-zinc-900" :
+                    " w-full flex justify-center items-center p-2 rounded-lg transition-colors duration-200 bg-slate-300 text-zinc-900 hover:text-slate-100 hover:bg-zinc-900"
                 }
                 style={{ fontSize: size }}
                 size={!sm ? "" : "sm"}

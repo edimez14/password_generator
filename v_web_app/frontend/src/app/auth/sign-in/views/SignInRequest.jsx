@@ -1,8 +1,14 @@
 'use client'
+import { useState } from "react"; 
 
-import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
+
+import { Input } from "@nextui-org/react";
+
+import { MdOutlineEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
+
 import { SignInUser } from "@/app/utils/Request.api";
 
 export default function SignInRequest() {
@@ -30,7 +36,7 @@ export default function SignInRequest() {
 		try {
 			const response = await SignInUser(formData);
 			sessionStorage.setItem('authToken', response.data.access);
-			// localStorage.setItem('authToken', response.data.access);
+			sessionStorage.setItem('user', JSON.stringify(response.data.user));
 			window.location.href = "/";
 		} catch (error) {
 			if (error.response && error.response.data) {
@@ -51,11 +57,15 @@ export default function SignInRequest() {
 							Email:
 						</label>
 						<div>
-							<input
-								className="bg-slate-300 rounded-lg text-slate-800 p-2 m-2 border-1 border-neutral-900"
+							<Input
+								autoFocus
+								className="bg-slate-300 rounded-xl text-slate-800 m-2"
+								endContent={
+									<MdOutlineEmail />
+								}
 								type="email"
 								name="email"
-								placeholder="Email"
+								placeholder="Enter your email"
 								onChange={handleChange}
 							/>
 						</div>
@@ -66,11 +76,14 @@ export default function SignInRequest() {
 							Password:
 						</label>
 						<div>
-							<input
-								className="bg-slate-300 rounded-lg text-slate-800 p-2 m-2 border-1 border-neutral-900"
+							<Input
+								className="bg-slate-300 rounded-xl text-slate-800 m-2"
+								endContent={
+									<RiLockPasswordLine />
+								}
 								type="password"
 								name="password"
-								placeholder="Password"
+								placeholder="Enter your password"
 								onChange={handleChange}
 							/>
 						</div>

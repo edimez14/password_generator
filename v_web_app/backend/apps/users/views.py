@@ -10,6 +10,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Users
 from .serializers import UsersSerializer
 
+
 @permission_classes([AllowAny])
 class UsersData(viewsets.ModelViewSet):
     serializer_class = UsersSerializer
@@ -84,6 +85,11 @@ def sign_up(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def profile(request):
+    try:
+        serializer = UsersSerializer(instance=request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
-    serializer = UsersSerializer(instance=request.user)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    except Users.DoesNotExist:
+        return Response({'error': 'The user cannot be found in the database.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -5,14 +5,16 @@ import { useState } from 'react';
 import { Button } from "@nextui-org/button";
 import { CopyButton } from '@/app/components/CopyButton';
 
-import { getPassword } from '@/app/utils/Request.api';
+import { getGeneratePassword } from '@/app/utils/Request.api';
 
-export default function Content() {
+import ModalSavedPasswords from './ModalSavedPasswords';
+
+export default function TrueAuthContent() {
   const [password, setPassword] = useState("Press the button to generate a password");
 
   const handleOnClick = async () => {
     try {
-      const newPassword = await getPassword();
+      const newPassword = await getGeneratePassword();
       setPassword(newPassword);
     } catch (error) {
       console.error("Error getting password:", error);
@@ -33,6 +35,7 @@ export default function Content() {
           >
             generate password
           </Button>
+          <ModalSavedPasswords password={password} changePassword={handleOnClick} />
         </div>
       </main>
     </>

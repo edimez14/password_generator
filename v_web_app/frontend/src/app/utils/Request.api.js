@@ -1,18 +1,13 @@
+// Request.api.js
 import axios from 'axios';
 
 const api = axios.create({
     baseURL: 'http://localhost:8000/api/',
 });
 
-const postToken = (tokenData) =>  {
-    return {
-        headers: {
-            Authorization: `Bearer ${tokenData}`,
-        },
-    }
-};
+export const postToken = (tokenData) => `Bearer ${tokenData}`;
 
-export const getPassword = async () => {
+export const getGeneratePassword = async () => {
     try {
         const response = await api.get("response-password/");
         if (response.data && response.data.output) {
@@ -26,6 +21,27 @@ export const getPassword = async () => {
         console.error("Error fetching Python output:", error);
         throw error;
     }
+};
+
+export const postPassword = (passwordData, token) => {
+
+    const headersList = {
+        "Accept": "*/*",
+        "Authorization": token,
+        "Content-Type": "application/json"
+    }
+
+    const bodyContent = JSON.stringify(passwordData);
+
+    const reqOptions = {
+        url: "save-passwords/",
+        method: "POST",
+        headers: headersList,
+        data: bodyContent,
+    }
+
+    const response = api.request(reqOptions);
+    return response;
 };
 
 export const SignInUser = (userData) => api.post("sign-in/", userData);

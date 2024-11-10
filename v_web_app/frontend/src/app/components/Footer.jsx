@@ -3,6 +3,8 @@ import { FaDollarSign, FaUser, FaGithub } from 'react-icons/fa';
 import LinkButton from "@/app/components/LinkButton";
 
 export default function Footer() {
+    const currentYear = new Date().getFullYear(); 
+
     return (
         <>
             <footer className='flex justify-center items-center'>
@@ -29,7 +31,7 @@ export default function Footer() {
                     </div>
                     <div>
                         <p>
-                            &copy; 2024 - 2024 all rights reserved v0.2.3
+                            &copy; 2024 - {currentYear} all rights reserved v0.2.4
                         </p>
                     </div>
                 </div>
