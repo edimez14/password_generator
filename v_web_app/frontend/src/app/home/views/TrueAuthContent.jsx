@@ -1,25 +1,22 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import { Button } from "@nextui-org/button";
 import { CopyButton } from '@/app/components/CopyButton';
 
-import { getGeneratePassword } from '@/app/utils/Request.api';
-
 import ModalSavedPasswords from './ModalSavedPasswords';
+import ButtonGeneratePassword from '@/app/components/ButtonGeneratePassword';
 
 export default function TrueAuthContent() {
   const [password, setPassword] = useState("Press the button to generate a password");
 
-  const handleOnClick = async () => {
-    try {
-      const newPassword = await getGeneratePassword();
-      setPassword(newPassword);
-    } catch (error) {
-      console.error("Error getting password:", error);
-    }
-  };
+  useEffect(() => {
+    setPassword(password);
+  }, [password]);
+
+  const handlePasswordChange = (data) => {
+    setPassword(data);
+};
 
   return (
     <>
@@ -29,13 +26,11 @@ export default function TrueAuthContent() {
           <CopyButton textToCopy={password} />
         </div>
         <div className='flex gap-2'>
-          <Button
-            className='p-2 rounded-lg transition-colors duration-200 bg-slate-300 text-zinc-900 hover:text-slate-100 hover:bg-zinc-600'
-            onClick={handleOnClick}
-          >
-            generate password
-          </Button>
-          <ModalSavedPasswords password={password} changePassword={handleOnClick} />
+          <ButtonGeneratePassword
+            textButton="Generate password"
+            onReturnPassword={handlePasswordChange}
+          />
+          <ModalSavedPasswords password={password} changePassword={handlePasswordChange} />
         </div>
       </main>
     </>

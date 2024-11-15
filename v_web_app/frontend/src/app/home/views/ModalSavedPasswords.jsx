@@ -13,8 +13,9 @@ import {
 } from "@nextui-org/react";
 
 import FormSavedPasswords from "../components/FormSavedPasswords";
+import ButtonGeneratePassword from '@/app/components/ButtonGeneratePassword';
 
-import { postToken, postPassword } from "@/app/utils/Request.api";
+import { postToken, RequestPassword } from "@/app/utils/Request.api";
 
 import "@/app/style/glassmorphism.css";
 
@@ -23,6 +24,15 @@ export default function ModalSavedPasswords({ password, changePassword }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     const token = sessionStorage.getItem('authToken');
+
+    useEffect(() => {
+        if (formData) {
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                passwordSaved: password
+            }));
+        }
+    }, [password]);
 
     const handleFormDataChange = (data) => {
         // console.log("Datos actualizados recibidos en el modal:", data);
@@ -37,28 +47,19 @@ export default function ModalSavedPasswords({ password, changePassword }) {
                 user: formData.user,
                 password_saved: password
             };
-    
+
             // console.log("contraseña guardada:", dataToSend.passwordSaved);
 
-        try {
-            const response = await postPassword(dataToSend, postToken(token));
-            // console.log(response);
-        } catch (error) {
-            console.error("Error saving password:", error.response?.data || error.message || error);
+            try {
+                const response = await RequestPassword("POST", "save-passwords/", dataToSend, postToken(token));
+                // console.log(response);
+            } catch (error) {
+                console.error("Error saving password:", error.response?.data || error.message || error);
+            }
+        } else {
+            console.log("formData es null o vacío, no se puede guardar");
         }
-    } else {
-        console.log("formData es null o vacío, no se puede guardar");
-    }
     };
-
-    useEffect(() => {
-        if (formData) {
-            setFormData(prevFormData => ({
-                ...prevFormData,
-                passwordSaved: password
-            }));
-        }
-    }, [password]);
 
     return (
         <>
@@ -77,12 +78,10 @@ export default function ModalSavedPasswords({ password, changePassword }) {
                                 <FormSavedPasswords password={password} onDataChange={handleFormDataChange} />
                             </ModalBody>
                             <ModalFooter>
-                                <Button
-                                    className='p-2 rounded-lg transition-colors duration-200 bg-slate-300 text-zinc-900 hover:text-slate-100 hover:bg-zinc-600'
-                                    onClick={changePassword}
-                                >
-                                    Change password
-                                </Button>
+                                <ButtonGeneratePassword
+                                    textButton="Change password"
+                                    onReturnPassword={changePassword}
+                                />
                                 <Button
                                     className='p-2 rounded-lg transition-colors duration-200 bg-slate-300 text-zinc-900 hover:text-slate-100 hover:bg-zinc-600'
                                     onPress={() => {

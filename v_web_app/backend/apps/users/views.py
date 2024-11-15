@@ -93,3 +93,35 @@ def profile(request):
         return Response({'error': 'The user cannot be found in the database.'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_profile(request, pk):
+    try:
+        data_instance = Users.objects.get(
+            pk=pk, user=request.user)
+        serializer = UsersSerializer(
+            data_instance, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response("data saved", status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Users.DoesNotExist:
+        return Response({'error': 'data not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_user(request, pk):
+    try:
+        user_instance = Users.objects.get(
+            pk=pk, user=request.user)
+        user_instance.delete()
+        return Response({"message": "user deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+    except Users.DoesNotExist:
+        return Response({'error': 'user not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

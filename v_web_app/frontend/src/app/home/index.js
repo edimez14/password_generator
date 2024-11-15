@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
 
-import { AuthContext } from "@/app/utils/AuthContext";
+import { IsAuth } from "@/app/utils/AuthContext";
 import LoadingPage from "@/app/views/LoadingPage";
 import Footer from "@/app/components/Footer";
 
@@ -14,7 +14,7 @@ import TrueAuthContent from "./views/TrueAuthContent";
 
 export default function Index() {
   const [loading, setLoading] = useState(true);
-  const isAuthenticated = AuthContext();
+  const isAuthenticated = IsAuth();
 
   useEffect(() => {
     setLoading(false);

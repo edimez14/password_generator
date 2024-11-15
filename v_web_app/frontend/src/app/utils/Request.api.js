@@ -23,7 +23,7 @@ export const getGeneratePassword = async () => {
     }
 };
 
-export const postPassword = (passwordData, token) => {
+export const RequestPassword = (typeRequest, url, data, token) => {
 
     const headersList = {
         "Accept": "*/*",
@@ -31,11 +31,11 @@ export const postPassword = (passwordData, token) => {
         "Content-Type": "application/json"
     }
 
-    const bodyContent = JSON.stringify(passwordData);
+    const bodyContent = JSON.stringify(data);
 
     const reqOptions = {
-        url: "save-passwords/",
-        method: "POST",
+        url: url,
+        method: typeRequest,
         headers: headersList,
         data: bodyContent,
     }

@@ -2,7 +2,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-export function AuthContext() {
+export function IsAuth() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
@@ -16,3 +16,4 @@ export function AuthContext() {
 
     return isAuthenticated;
 }
+

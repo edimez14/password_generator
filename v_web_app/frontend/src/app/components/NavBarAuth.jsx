@@ -7,8 +7,9 @@ import { Button } from "@nextui-org/button";
 import { RiLockPasswordLine } from "react-icons/ri";
 
 import ThemeToggleButton from "@/app/components/ThemeToggleButton";
+import DropDownMenu from "./DropDownMenu";
 
-export default function NavBarAuth() {
+export default function NavBarAuth({wantMenuButton = false}) {
     return (
         <>
             <div className="flex justify-between">
@@ -30,7 +31,16 @@ export default function NavBarAuth() {
                     </Link>
                 </div>
                 <div className="flex rounded-md mx-4 p-1 space-x-4">
-                    <ThemeToggleButton />
+                    {
+                        wantMenuButton ? (
+                            <>
+                                <DropDownMenu />
+                                <ThemeToggleButton />
+                            </>
+                        ) : (
+                            <ThemeToggleButton />
+                        )
+                    }
                 </div>
             </div>
         </>

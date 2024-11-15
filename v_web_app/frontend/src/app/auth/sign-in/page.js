@@ -4,7 +4,7 @@
 import Footer from "@/app/components/Footer";
 
 import SignInRequest from "./views/SignInRequest";
-import NavBarAuth from "../components/NavBarAuth";
+import NavBarAuth from "../../components/NavBarAuth";
 
 import "@/app/style/glassmorphism.css";
 

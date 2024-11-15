@@ -31,7 +31,7 @@ export default function Footer() {
                     </div>
                     <div>
                         <p>
-                            &copy; 2024 - {currentYear} all rights reserved v0.2.4
+                            &copy; 2024 - {currentYear} all rights reserved v0.2.5
                         </p>
                     </div>
                 </div>

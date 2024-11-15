@@ -9,8 +9,6 @@ from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from rest_framework_simplejwt.tokens import RefreshToken
-
 from .models import SavedPasswords
 from .serializers import SavedPasswordsSerializer
 
@@ -37,7 +35,8 @@ def save_passwords(request):
         serializer = SavedPasswordsSerializer(data=request.data)
 
         if serializer.is_valid():
-            print("Datos recibidos en el backend:", serializer.validated_data)  # Depuración
+            print("Datos recibidos en el backend:",
+                  serializer.validated_data)  # Depuración
             serializer.save()
 
             passwords = SavedPasswords.objects.filter(
@@ -48,9 +47,7 @@ def save_passwords(request):
             for password in passwords:
                 password.save()
 
-            return Response({
-                'saved passwords': serializer.data
-            }, status=status.HTTP_200_OK)
+            return Response("password saved successfully", status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -84,5 +81,37 @@ def view_all_saved_passwords(request):
         return Response({'error': 'Missing required fields.'}, status=status.HTTP_400_BAD_REQUEST)
     except SavedPasswords.DoesNotExist:
         return Response({'error': 'password does not exist after creation.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_saved_password(request, pk):
+    try:
+        password_instance = SavedPasswords.objects.get(
+            pk=pk, user=request.user)
+        serializer = SavedPasswordsSerializer(
+            password_instance, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response("data saved", status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except SavedPasswords.DoesNotExist:
+        return Response({'error': 'Password not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_saved_password(request, pk):
+    try:
+        password_instance = SavedPasswords.objects.get(
+            pk=pk, user=request.user)
+        password_instance.delete()
+        return Response({"message": "Password deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+    except SavedPasswords.DoesNotExist:
+        return Response({'error': 'Password not found.'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

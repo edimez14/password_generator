@@ -2,7 +2,7 @@
 'use client'
 import { useState, useEffect } from "react";
 
-import { Input } from "@nextui-org/react";
+import { Input } from "@nextui-org/react"; 
 
 import { BiRename } from "react-icons/bi";
 import { GoLink } from "react-icons/go";
