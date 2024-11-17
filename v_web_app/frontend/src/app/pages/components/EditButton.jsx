@@ -45,7 +45,7 @@ export default function EditButton({ big = false, isPassword = false, initialVal
                                     <input
                                         type="text"
                                         value={inputValue}
-                                        onChange={() => {}}
+                                        onChange={() => { }}
                                         className="border p-1 rounded"
                                     />
                                     <ButtonGeneratePassword
@@ -57,7 +57,7 @@ export default function EditButton({ big = false, isPassword = false, initialVal
                         }
                     </>
                 ) : (
-                    !big ? <span className="text-2xl">{inputValue}</span> : <span className="text-4xl font-bold">{inputValue}</span>
+                    !big ? <span className="text-xl md:text-2xl">{inputValue}</span> : <span className="text-4xl font-bold">{inputValue}</span>
                 )
             }
             <Button isIconOnly className='bg-transparent' onClick={handleEditClick}>

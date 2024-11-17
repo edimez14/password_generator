@@ -50,7 +50,7 @@ export default function SignUpRequest() {
         <>
             <div>
                 <form className="grid justify-center" onSubmit={handleSubmit}>
-                    <div className="grid grid-cols-2 grid-rows-3 gap-3 px-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 gap-3 px-10">
                         <div className="">
                             <label
                                 className="text-center  m-5"
@@ -182,7 +182,7 @@ export default function SignUpRequest() {
                     </div>
                 </form>
                 <div className="flex justify-center">
-                    <p className=" m-5">
+                    <p className="m-5 text-small sm:text-medium lg:text-large">
                         Already have an account?{" "}
                         <Link
                             target="_self"

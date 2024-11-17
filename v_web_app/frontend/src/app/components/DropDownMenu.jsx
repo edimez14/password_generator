@@ -8,7 +8,6 @@ import { Button } from "@nextui-org/button";
 
 import { CiSaveDown2 } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
 import { RiMenuLine } from "react-icons/ri";
 import { RiLogoutBoxLine } from "react-icons/ri";
 

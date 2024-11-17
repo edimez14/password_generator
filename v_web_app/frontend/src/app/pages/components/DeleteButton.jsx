@@ -3,9 +3,9 @@ import { useState } from 'react';
 
 import { Button } from '@nextui-org/button';
 
-import { postToken, RequestPassword } from '@/app/utils/Request.api';
+import { postToken, BackendRequest } from '@/app/utils/Request.api';
 
-export default function DeleteButton({ passwordId, onDelete }) {
+export default function DeleteButton({textButton, requestUrl, id, onDelete }) {
     const [loading, setLoading] = useState(false);
 
     const handleDelete = async () => {
@@ -13,11 +13,11 @@ export default function DeleteButton({ passwordId, onDelete }) {
         try {
             const token = postToken(sessionStorage.getItem('authToken'));
             const userId = JSON.parse(sessionStorage.getItem('user'))?.id || null;
-            const url = `view-all-saved-passwords/${passwordId}/delete/`;
-            const response = await RequestPassword('DELETE', url, userId, token);
+            const url = `${requestUrl}/${id}/delete/`;
+            const response = await BackendRequest('DELETE', url, userId, token);
             
             if (response.status === 204) {
-                onDelete(passwordId);
+                onDelete(id);
             } else {
                 console.error("Error deleting password:", response.data);
             }
@@ -34,7 +34,7 @@ export default function DeleteButton({ passwordId, onDelete }) {
             disabled={loading}
             className="flex items-center text-2xl gap-2 px-4 py-2 text-red-600 border border-red-600 rounded hover:bg-red-600 hover:text-white"
         >
-            {loading ? "Deleting..." : "Delete Password"}
+            {loading ? "Deleting..." : textButton}
         </Button>
     );
 }

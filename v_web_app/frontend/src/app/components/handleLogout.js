@@ -1,5 +1,4 @@
 export default function handleLogout() {
-    sessionStorage.removeItem("authToken");
-    sessionStorage.removeItem("refreshToken");
+    sessionStorage.clear();
     window.location.href = "/";
 };

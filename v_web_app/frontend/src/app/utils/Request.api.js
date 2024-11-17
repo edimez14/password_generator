@@ -11,7 +11,6 @@ export const getGeneratePassword = async () => {
     try {
         const response = await api.get("response-password/");
         if (response.data && response.data.output) {
-            // console.log(response.data.output);
             return response.data.output;
         }
         else {
@@ -23,15 +22,19 @@ export const getGeneratePassword = async () => {
     }
 };
 
-export const RequestPassword = (typeRequest, url, data, token) => {
+export const SignInUser = (userData) => api.post("sign-in/", userData);
+
+export const createUser = (user) => api.post("sign-up/", user);
+
+export const BackendRequest = (typeRequest, url, data, token, isMultipart = false) => {
 
     const headersList = {
         "Accept": "*/*",
         "Authorization": token,
-        "Content-Type": "application/json"
+        "Content-Type": isMultipart ? 'multipart/form-data' : 'application/json'
     }
 
-    const bodyContent = JSON.stringify(data);
+    const bodyContent = isMultipart ? data : JSON.stringify(data);
 
     const reqOptions = {
         url: url,
@@ -43,7 +46,3 @@ export const RequestPassword = (typeRequest, url, data, token) => {
     const response = api.request(reqOptions);
     return response;
 };
-
-export const SignInUser = (userData) => api.post("sign-in/", userData);
-
-export const createUser = (user) => api.post("sign-up/", user);

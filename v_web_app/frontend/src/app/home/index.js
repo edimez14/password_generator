@@ -24,7 +24,7 @@ export default function Index() {
     <>
       {
         loading ? <LoadingPage /> : (
-          <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-1 pb-2 gap-16 sm:p-8 font-[family-name:var(--font-geist-sans)]" >
+          <div className="grid grid-rows-[20px_0.97fr_20px] sm:grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-1 pb-2 sm:p-8 lg:gap-16 md:gap-11 sm:gap-8 font-[family-name:var(--font-geist-sans)]" >
             {
               isAuthenticated ? (
                 <>

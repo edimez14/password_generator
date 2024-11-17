@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from .models import Users
 from .serializers import UsersSerializer
@@ -28,8 +29,6 @@ def sign_in(request):
 
         refresh = RefreshToken.for_user(user)
         serializer = UsersSerializer(instance=user)
-
-        # print(f"token del inicio de sesion: {refresh}\n {refresh.access_token}")
 
         return Response({
             'refresh': str(refresh),
@@ -64,8 +63,6 @@ def sign_up(request):
 
             refresh = RefreshToken.for_user(user)
 
-            # print(f"token del registro: {refresh}\n {refresh.access_token}")
-
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
@@ -99,29 +96,34 @@ def profile(request):
 @permission_classes([IsAuthenticated])
 def update_profile(request, pk):
     try:
-        data_instance = Users.objects.get(
-            pk=pk, user=request.user)
-        serializer = UsersSerializer(
-            data_instance, data=request.data, partial=True)
+        user = get_object_or_404(Users, pk=pk)
+        if user != request.user:
+            return Response({"error": "Not authorized"}, status=status.HTTP_403_FORBIDDEN)
+
+        parser_classes = (MultiPartParser, FormParser)
+        
+        if 'avatars' in request.FILES:
+            avatar = request.FILES['avatar']
+            user.avatar = avatar
+            user.save()
+
+        serializer = UsersSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response("data saved", status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    except Users.DoesNotExist:
-        return Response({'error': 'data not found.'}, status=status.HTTP_404_NOT_FOUND)
+
     except Exception as e:
-        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
-def delete_user(request, pk):
+def delete_user(request, user_id):
     try:
-        user_instance = Users.objects.get(
-            pk=pk, user=request.user)
-        user_instance.delete()
-        return Response({"message": "user deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
-    except Users.DoesNotExist:
-        return Response({'error': 'user not found.'}, status=status.HTTP_404_NOT_FOUND)
+        user = get_object_or_404(Users, id=user_id)
+        user.delete()
+        return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
     except Exception as e:
-        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

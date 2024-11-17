@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 
 import { IsAuth } from "@/app/utils/AuthContext";
 import LoadingPage from "@/app/views/LoadingPage";
+import NavBarAuth from '@/app/components/NavBarAuth';
+
+import Content from './views/Content';
+import Footer from '@/app/components/Footer';
 
 export default function Profile() {
     const [loading, setLoading] = useState(true);
@@ -19,8 +23,12 @@ export default function Profile() {
                     <>
                         {
                             isAuthenticated ? (
-                                <div className="h-screen flex justify-center items-center m-auto">
-                                    <p>Profile</p>
+                                <div className="h-screen flex flex-col">
+                                    <NavBarAuth wantMenuButton={true} />
+                                    <div className='flex justify-center items-center m-auto'>
+                                        <Content />
+                                    </div>
+                                    <Footer />
                                 </div>
                             ) : (
                                 <>

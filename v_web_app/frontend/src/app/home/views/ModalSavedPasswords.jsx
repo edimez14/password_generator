@@ -15,7 +15,7 @@ import {
 import FormSavedPasswords from "../components/FormSavedPasswords";
 import ButtonGeneratePassword from '@/app/components/ButtonGeneratePassword';
 
-import { postToken, RequestPassword } from "@/app/utils/Request.api";
+import { postToken, BackendRequest } from "@/app/utils/Request.api";
 
 import "@/app/style/glassmorphism.css";
 
@@ -51,7 +51,7 @@ export default function ModalSavedPasswords({ password, changePassword }) {
             // console.log("contraseña guardada:", dataToSend.passwordSaved);
 
             try {
-                const response = await RequestPassword("POST", "save-passwords/", dataToSend, postToken(token));
+                const response = await BackendRequest("POST", "save-passwords/", dataToSend, postToken(token));
                 // console.log(response);
             } catch (error) {
                 console.error("Error saving password:", error.response?.data || error.message || error);
@@ -67,7 +67,7 @@ export default function ModalSavedPasswords({ password, changePassword }) {
             <Modal
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
-                placement="top-center"
+                placement="center"
                 className="bg-slate-400"
             >
                 <ModalContent>

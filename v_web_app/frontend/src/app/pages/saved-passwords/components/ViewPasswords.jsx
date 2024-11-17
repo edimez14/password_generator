@@ -2,11 +2,10 @@
 import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
-import { Button } from '@nextui-org/button';
 
-import { postToken, RequestPassword } from '@/app/utils/Request.api';
+import { postToken, BackendRequest } from '@/app/utils/Request.api';
 
-export default function ViewPasswords({ onPasswordSelect }) {
+export default function ViewPasswords({ onPasswordSelect, searchTerm }) {
     const [passwords, setPasswords] = useState([]);
     const [selectedPasswordId, setSelectedPasswordId] = useState(null);
     const token = postToken(sessionStorage.getItem('authToken'));
@@ -15,7 +14,7 @@ export default function ViewPasswords({ onPasswordSelect }) {
     useEffect(() => {
         const fetchPasswords = async () => {
             try {
-                const response = await RequestPassword("GET", "view-all-saved-passwords/", userId, token);
+                const response = await BackendRequest("GET", "view-all-saved-passwords/", userId, token);
                 setPasswords(response.data.passwords);
             } catch (error) {
                 console.error('Error fetching passwords', error);
@@ -30,14 +29,20 @@ export default function ViewPasswords({ onPasswordSelect }) {
         onPasswordSelect(password);
     };
 
+    // Filtrar las contraseñas basándonos en searchTerm
+    const filteredPasswords = passwords.filter((password) =>
+        password.name_pages.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        password.url.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div>
             <p>Passwords saved by the user:</p>
             <div>
-            {passwords.length === 0 ? (
-                    <p>No saved passwords found</p>
+                {filteredPasswords.length === 0 ? (
+                    <p>No passwords match your search.</p>
                 ) : (
-                    passwords.map((password) => (
+                    filteredPasswords.map((password) => (
                         <Link
                             key={password.id}
                             href={"#"}
@@ -45,7 +50,7 @@ export default function ViewPasswords({ onPasswordSelect }) {
                             onClick={() => handlePasswordClick(password)}
                         >
                             {password.name_pages}
-                            <br/>
+                            <br />
                             {password.url}
                         </Link>
                     ))

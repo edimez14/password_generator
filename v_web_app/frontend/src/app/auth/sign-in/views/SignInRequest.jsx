@@ -100,7 +100,7 @@ export default function SignInRequest() {
 				</div>
 			</form>
 			<div className="flex justify-center">
-				<p className="m-5">
+				<p className="m-5 text-small sm:text-medium lg:text-large">
 					You don't have an account?{" "}
 					<Link
 						target="_self"

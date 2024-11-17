@@ -1,7 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
-import { postToken, RequestPassword } from '@/app/utils/Request.api';
+import { postToken, BackendRequest } from '@/app/utils/Request.api';
 
 import NavBarAuth from '@/app/components/NavBarAuth';
 import Footer from '@/app/components/Footer';
@@ -28,7 +29,7 @@ export default function Content({ selectedPassword, onPasswordDeleted }) {
                 user: userId,
                 [field]: newValue,
             };
-            const response = await RequestPassword('PUT', url, data, token);
+            const response = await BackendRequest('PUT', url, data, token);
 
             if (field === 'password_saved') {
                 setPassword(newValue);
@@ -50,10 +51,10 @@ export default function Content({ selectedPassword, onPasswordDeleted }) {
         <div className="flex flex-col justify-between h-full p-8">
             <div className="w-full">
                 <NavBarAuth wantMenuButton={true} />
-                <div className="flex flex-col gap-4 justify-start items-start w-full px-16 py-40 flex-grow">
+                <div className="flex flex-col gap-4 justify-start items-start w-full h-auto px-16 py-32 md:py-40">
                     {selectedPassword ? (
                         <>
-                            <div className='grid grid-cols-2 gap-8'>
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-8 m-auto'>
                                 <div>
                                     <div className='flex justify-between items-center gap-2'>
                                         <EditButton
@@ -82,14 +83,19 @@ export default function Content({ selectedPassword, onPasswordDeleted }) {
                                 </div>
                                 <div className="flex justify-end items-end mt-4">
                                     <DeleteButton
-                                        passwordId={selectedPassword.id}
+                                        textButton="Delete Password"
+                                        requestUrl="view-all-saved-passwords"
+                                        id={selectedPassword.id}
                                         onDelete={handleDelete}
                                     />
                                 </div>
                             </div>
                         </>
                     ) : (
-                        <p className="text-4xl font-bold">Hola</p>
+                        <>
+                            <p className="text-4xl font-bold">Hello</p>
+                            <p className="text-2xl">choose a saved password</p>
+                        </>
                     )}
                 </div>
             </div>
