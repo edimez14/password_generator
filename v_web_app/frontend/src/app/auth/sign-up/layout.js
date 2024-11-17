@@ -1,7 +1,7 @@
 export const metadata = {
-    title: "Saved Passwords | Password Generator",
-    description: "page where users can view the passwords they have saved, they can also update the data of the passwords they select or they can delete the passwords they want",
-    keywords: "password generator, secure passwords, free password tool, random passwords, strong passwords, saved passwords",
+    title: "Sign up | Password Generator",
+    description: "page to register in the database of users of the random password generator",
+    keywords: "register, sign up",
     applicationName: "Password Generator",
     author: {
         name: "Edizon Alexander Meza Leal",
