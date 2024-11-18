@@ -39,7 +39,7 @@ export default function AvatarUploader({ currentAvatar, userId, token, onUpdateA
             <div className="flex justify-center items-center">
                 {currentAvatar ? (
                     <Image
-                        src={`http://localhost:8000${currentAvatar}`}
+                        src={`https://passwordgenerator-nelt.onrender.com${currentAvatar}`}
                         alt="Avatar"
                         width={200}
                         height={200}

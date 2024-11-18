@@ -170,7 +170,8 @@ SIMPLE_JWT = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 if DEBUG:
-    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEV')
+    # ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEV')
+    ALLOWED_HOSTS = []
 
     CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEV')
 
