@@ -12,10 +12,10 @@ from .models import Users
 from .serializers import UsersSerializer
 
 
-@permission_classes([AllowAny])
-class UsersData(viewsets.ModelViewSet):
-    serializer_class = UsersSerializer
-    queryset = Users.objects.all()
+# @permission_classes([AllowAny])
+# class UsersData(viewsets.ModelViewSet):
+#     serializer_class = UsersSerializer
+#     queryset = Users.objects.all()
 
 
 @api_view(['POST'])
