@@ -27,7 +27,6 @@ export default function SignUpRequest() {
 
         if (Object.values(formData).some(field => !field)) {
             setErrorMessage("Please fill in all fields.");
-            console.log(formData);
             return;
         }
 
