@@ -186,13 +186,15 @@ if DEBUG:
     }
 
 else:
-    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
+    # ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
 
     RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
     if RENDER_EXTERNAL_HOSTNAME:
         ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+        
     CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEPLOY')
     CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
+    CORS_ALLOW_CREDENTIALS = True
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
