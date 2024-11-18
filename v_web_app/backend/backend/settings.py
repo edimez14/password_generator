@@ -2,6 +2,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 import environ
+import dj_database_url
 
 env = environ.Env()
 environ.Env.read_env()
@@ -17,7 +18,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+# DEBUG = os.environ.get('DEBUG')
+DEBUG = 'RENDER' not in os.environ.get('DEBUG')
 
 
 # Application definition
@@ -165,8 +167,6 @@ SIMPLE_JWT = {
 }
 
 
-
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 if DEBUG:
@@ -187,10 +187,19 @@ if DEBUG:
 
 else:
     ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY')
+
+    RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+    if RENDER_EXTERNAL_HOSTNAME:
+        ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
     CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEPLOY')
     CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
 
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
     DATABASES = {
-        'default': env.db('DATABASES_URL'),
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            **dj_database_url.config(conn_max_age=600, ssl_require=True)
+        }
     }
-    DATABASES["default"]["ATOMIC_REQUESTS"] = True
