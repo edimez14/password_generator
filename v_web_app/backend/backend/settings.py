@@ -178,12 +178,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # CORS_ALLOW_CREDENTIALS = True
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 if not DEBUG:
     ALLOWED_HOSTS = []
