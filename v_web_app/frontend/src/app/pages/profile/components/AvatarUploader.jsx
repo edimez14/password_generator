@@ -8,6 +8,7 @@ export default function AvatarUploader({ currentAvatar, userId, token, onUpdateA
     const [selectedFile, setSelectedFile] = useState(null);
     // const [formData, setFormData] = useState({});
     const [loading, setLoading] = useState(false);
+    const DEBUG = false
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -39,7 +40,7 @@ export default function AvatarUploader({ currentAvatar, userId, token, onUpdateA
             <div className="flex justify-center items-center">
                 {currentAvatar ? (
                     <Image
-                        src={`https://passwordgenerator-nelt.onrender.com${currentAvatar}`}
+                        src={!DEBUG ? `https://passwordgenerator-nelt.onrender.com${currentAvatar}` : `http://localhost:8000${currentAvatar}`}
                         alt="Avatar"
                         width={200}
                         height={200}

@@ -1,13 +1,10 @@
 // Request.api.js
 import axios from 'axios';
 
+const DEBUG = false
 const api = axios.create({
-    baseURL: 'https://passwordgenerator-nelt.onrender.com/api/',
+    baseURL: !DEBUG ? 'https://passwordgenerator-nelt.onrender.com/api/' : 'http://localhost:8000/api/',
 });
-
-/*const api = axios.create({
-    baseURL: 'http://localhost:8000/api/',
-});*/
 
 export const postToken = (tokenData) => `Bearer ${tokenData}`;
 
