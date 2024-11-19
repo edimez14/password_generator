@@ -29,7 +29,7 @@ export default function SavedPasswords() {
                     <>
                         {
                             isAuthenticated ? (
-                                <div className="h-auto md:h-screen flex-row md:flex">
+                                <div className="h-screen sm:h-auto md:h-screen flex-row md:flex">
                                     <SideNav onPasswordSelect={handlePasswordSelect} />
                                     <div className="flex-1">
                                         <Content selectedPassword={selectedPassword} />
