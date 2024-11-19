@@ -42,7 +42,7 @@ export const metadata = {
 
 export default function Layout({ children }) {
     return (
-        <div className="h-screen flex">
+        <div className="flex">
             <div className="flex-1">
                 {children}
             </div>
