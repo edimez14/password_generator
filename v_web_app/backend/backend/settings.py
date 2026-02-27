@@ -7,22 +7,12 @@ import dj_database_url
 env = environ.Env()
 environ.Env.read_env()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = env('SECRET_KEY')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG')
-DEBUG = 'RENDER' not in os.environ
-
-
-# Application definition
+# Configuración de DEBUG basada en variable de entorno
+DEBUG = env.bool('DEBUG', default=False)
 
 DJANGO_APPS = [
     'django.contrib.admin',
@@ -42,24 +32,13 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    # 'ckeditor',
-    # 'ckeditor_uploader',
     'coreapi',
     'rest_framework_simplejwt',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECTS_APPS + THIRD_PARTY_APPS
 
-
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'full',
-#         'autoParagraph': False,
-#     }
-# }
-
 CKEDITOR_UPLOAD_PATH = "/media/"
-
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -93,60 +72,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 AUTH_USER_MODEL = 'users.Users'
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'es-co'
-
 TIME_ZONE = 'America/Bogota'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, '../frontend/dist/assets'),
-# ]
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -167,38 +109,36 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Configuración por Entorno
 if not DEBUG:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEPLOY', default=[])
 
-    RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-    if RENDER_EXTERNAL_HOSTNAME:
-        ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    # Detección automática del host en Fly.io
+    FLY_APP_NAME = os.environ.get('FLY_APP_NAME')
+    if FLY_APP_NAME:
+        ALLOWED_HOSTS.append(f'{FLY_APP_NAME}.fly.dev')
 
-    CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEPLOY')
-    CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY')
+    CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEPLOY', default=[])
+    CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEPLOY', default=[])
     CORS_ALLOW_CREDENTIALS = True
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            **dj_database_url.config(conn_max_age=600, ssl_require=True)
-        }
+        'default': dj_database_url.config(
+            default=env('DATABASE_URL'),
+            conn_max_age=600,
+            ssl_require=True
+        )
     }
 
-elif DEBUG:
-    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEV')
-    # ALLOWED_HOSTS = []
-
-    CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEV')
-
-    CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEV')
-
+else:
+    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS_DEV', default=['localhost', '127.0.0.1'])
+    CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS_DEV', default=[])
+    CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS_DEV', default=[])
     CORS_ALLOW_CREDENTIALS = True
 
     DATABASES = {

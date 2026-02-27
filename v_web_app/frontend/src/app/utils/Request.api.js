@@ -1,9 +1,11 @@
 // Request.api.js
-import axios from 'axios';
+import axios from "axios";
 
-const DEBUG = false
+const DEBUG = false;
 const api = axios.create({
-  baseURL: !DEBUG ? 'https://passwordgenerator-nelt.onrender.com/api/' : 'http://localhost:8000/api/',
+  baseURL: !DEBUG
+    ? "https://password-generator-backend.fly.dev/api/"
+    : "http://localhost:8000/api/",
 });
 
 export const postToken = (tokenData) => `Bearer ${tokenData}`;
@@ -13,8 +15,7 @@ export const getGeneratePassword = async () => {
     const response = await api.get("response-password/");
     if (response.data && response.data.output) {
       return response.data.output;
-    }
-    else {
+    } else {
       throw new Error("No output returned from the backend");
     }
   } catch (error) {
@@ -27,13 +28,18 @@ export const SignInUser = (userData) => api.post("sign-in/", userData);
 
 export const createUser = (user) => api.post("sign-up/", user);
 
-export const BackendRequest = (typeRequest, url, data, token, isMultipart = false) => {
-
+export const BackendRequest = (
+  typeRequest,
+  url,
+  data,
+  token,
+  isMultipart = false,
+) => {
   const headersList = {
-    "Accept": "*/*",
-    "Authorization": token,
-    "Content-Type": isMultipart ? 'multipart/form-data' : 'application/json'
-  }
+    Accept: "*/*",
+    Authorization: token,
+    "Content-Type": isMultipart ? "multipart/form-data" : "application/json",
+  };
 
   const bodyContent = isMultipart ? data : JSON.stringify(data);
 
@@ -42,7 +48,7 @@ export const BackendRequest = (typeRequest, url, data, token, isMultipart = fals
     method: typeRequest,
     headers: headersList,
     data: bodyContent,
-  }
+  };
 
   const response = api.request(reqOptions);
   return response;
