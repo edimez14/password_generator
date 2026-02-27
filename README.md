@@ -1,129 +1,139 @@
 # Password Generator
 
-In this repository you can find a python package that uses python's random package to generate passwords completely randomly, by randomly selecting from a list that stores the generated passwords.
+## Overview
 
-In addition, its different applications were found so that the package can be consumed by users. For now, only its web application has been developed.
+This repository contains a **Password Generator** project developed to demonstrate backend logic, API integration, and frontend architecture. The project evolves from a foundational Object-Oriented Programming (OOP) Python module into a complete full-stack web application with authentication and CRUD operations. It is a personal learning project intended to showcase technical proficiency.
 
-## Installation
+---
 
-You can install the package using `pip`. Run the following command in your terminal:
+## Tech Stack
+
+**Frontend**
+
+- React.js
+- Next.js
+- Tailwind CSS
+- Axios
+
+**Backend**
+
+- Django
+- Django REST Framework (DRF)
+- SimpleJWT
+- CORS Headers
+
+**Core Logic**
+
+- Python
+
+---
+
+## Core Module Installation & Usage
+
+The core password generation logic is distributed as a Python package.
 
 ```bash
 pip install edimez14-password-generator-1
 ```
 
-## Usage
-
-Once the package is installed, you can use it to generate passwords directly from the command line or by importing it into your Python script.
-
-### Command Line Usage
-
-You can generate a password by simply running the module from the command line:
+### Command Line Execution
 
 ```bash
 python -m password_generator
 ```
 
-### Programmatic Usage
-
-You can also use the `password_generator` function programmatically in your own Python scripts. Here is an example:
+### Programmatic Integration
 
 ```python
 from password_generator import password_generator
 
-# Define lists for numbers, strings, and special characters
-list_num = list(range(0, 10))  # List of numbers
-list_str = list("abcdefghijklmnopqrstuvwxyz")  # List of lowercase letters
+list_num = list(range(0, 10))
+list_str = list("abcdefghijklmnopqrstuvwxyz")
 list_char = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~']
 
-# Generate a password
 generated_password = password_generator(list_num, list_str, list_char)
-
-# Print the generated password
 print("Generated Password:", generated_password)
 ```
 
-### Function Details
+---
 
-- **`password()`**: Generates and prints a random password composed of numbers, lowercase letters, and special characters. This function is called when you run the module directly.
+## Console Architecture
 
-- **`password_generator(list_num, list_str, list_char)`**: Accepts three lists:
-  - `list_num`: A list of numbers to be used in the password.
-  - `list_str`: A list of strings (letters) to be included in the password.
-  - `list_char`: A list of special characters to be included in the password.
-  
-  It returns a randomly generated password.
+This is the console version of the program. When executed, it runs the main function and prints a randomly generated password directly in the terminal.
 
-## Example
+![Console output](assets/img/password_generator.jpg)
 
-To generate a password, simply call the `password()` function:
+The internal architecture follows OOP principles. Three classes are defined, each responsible for managing a specific character group required for password generation. Each class constructor initializes its required parameters.
 
-```python
-from password_generator import password
+Each class exposes a method that generates a randomized list of elements based on the initialized parameters.
 
-# Call the password function to generate a password
-password()
-```
+![Class structure](assets/img/cap_cv_1.jpg)
 
-## Console version
+The `password_generator` function accepts three lists as input. It iterates multiple times to generate a pool of candidate passwords, randomly selecting and returning one of them to ensure sufficient entropy.
 
-This is the console version of the program, and as you can see in the image, when you run the program what is returned is the main function that prints a randomly generated password in the console.
+![Password generator logic](assets/img/cap_cv_2.jpg)
 
-![screenshot of the password generator](assets/img/password_generator.jpg)
+The `main` function acts as the entry point. It instantiates each class, invokes their generation methods, and passes the resulting lists to the `password_generator` function.
 
-In the program code you can find three classes, each with its constructor that will store the parameters it needs to generate the random list of elements we need in a password.
+![Main function flow](assets/img/cap_cv_3.jpg)
 
-Then each class has its method, which is the one that receives the parameters requested by the constructor and with those parameters it generates a random list of the elements that each class works with.
+---
 
-![screenshot of the password generator](assets/img/cap_cv_1.jpg)
+## Full-Stack Web Application
 
-we have the password_generator function that requests three list type parameters that has a for loop that repeats 50 times to generate in each iteration a random password that is added to a list and then a variable randomly selects an index of that list of passwords and returns the variable with the chosen password.
+The project extends the core Python logic into a full-stack web application. The frontend is built using React.js and Next.js, styled with Tailwind CSS. The backend API is implemented with Django and Django REST Framework.
 
-![screenshot of the password generator](assets/img/cap_cv_2.jpg)
+When accessing the website, users are presented with an interface describing available actions.
 
-Last but not least we have the main function that is responsible for storing each class in a variable and placing the parameter that it requests, then that variable calls the method that the class has to generate the list with the random elements.
+![Web landing page](assets/img/cap_vw_1.jpg)
 
-The main function will return the password_generator function and the parameters it will set will be the variables that store the list of random elements.
+By pressing the **Generate Password** button, the application requests a new password from the backend API. Each request returns a different randomly generated password.
 
-![screenshot of the password generator](assets/img/cap_cv_3.jpg)
+![Password generation](assets/img/cap_vw_2.jpg)
 
-## Web version 
+---
 
-When you enter the website, you will find a message that will tell you the things you can do on the website.
-The framework I used to create the password generator web page was with Reactjs, Nextjs, axios, tailwind css to develop the frontend; on the other hand the development of the backend of the page was done with Django, Django Rest Framework, cors hearders, rest framework simpleJWT.
+## Authentication and User System
 
-![screenshot of the password generator](assets/img/cap_vw_1.jpg)
+The application implements a robust authentication and registration system. Registered users gain access to additional features beyond basic password generation.
 
-When you press the generate password button, the website will show a randomly generated password, and every time you click the button, it will generate a new password different from the previous one.
+![Login page](assets/img/cap_vw_3.jpg)
+![Register page](assets/img/cap_vw_4.jpg)
 
-![screenshot of the password generator](assets/img/cap_vw_2.jpg)
+After authentication, users can continue generating passwords and access a navigation menu. This menu provides routes to the user profile, saved passwords, and logout functionality.
 
-The page has a robust login and user registration system, so that registered users can have more features that the page offers.
+![Authenticated menu](assets/img/cap_vw_5.jpg)
 
-![screenshot of the password generator](assets/img/cap_vw_3.jpg)
+---
 
-![screenshot of the password generator](assets/img/cap_vw_4.jpg)
+## UI Features and State Management
 
-When logging in or registering, the user will be able to continue generating passwords and will also see a menu button where he will see different buttons that will take him to different pages, such as one that will take him to his user profile, another that will redirect him to the page that shows him all the passwords he has saved, and there will also be a button to log out.
+The interface includes a global theme toggle, allowing users to switch between light and dark modes.
 
-![screenshot of the password generator](assets/img/cap_vw_5.jpg)
+Authenticated users can save generated passwords. Clicking the save button opens a modal with a form requesting additional metadata before persisting the password.
 
-You can see that there is also a theme change button, where you can change from light to dark or from dark to light.
+![Save password modal](assets/img/cap_vw_6.jpg)
 
-Also next to the button to generate passwords, a button will appear to save the passwords that the user wants to save. When that button is pressed, a modal will appear with a form that will ask for some data to save the password.
+---
 
-![screenshot of the password generator](assets/img/cap_vw_6.jpg)
+## CRUD Operations
 
-Page that shows registered users all the passwords they have saved.
+### Saved Passwords
 
-On this page the user can select the password they want to update their data or delete the saved password.
+This page displays all passwords saved by the authenticated user. Users can select any entry to update its data or delete it permanently.
 
-![screenshot of the password generator](assets/img/cap_vw_7.jpg)
+![Saved passwords page](assets/img/cap_vw_7.jpg)
 
-Page that displays the profile data of registered users.
+### User Profile
 
-On this page the user can update their data or, if they wish, delete their account, thereby deleting all their saved passwords.
+The profile page displays the user’s account data. From this view, users can update their information or delete their account. Account deletion triggers the removal of all associated saved passwords.
 
-![screenshot of the password generator](assets/img/cap_vw_8.jpg)
+![User profile page](assets/img/cap_vw_8.jpg)
 
-You can generate the number of passwords you prefer, there is no limit.
+---
+
+## Notes
+
+- Password generation has no hard limit.
+- All persisted data is scoped to authenticated users via JWT.
+- The project demonstrates end-to-end integration from core logic to user-facing application.

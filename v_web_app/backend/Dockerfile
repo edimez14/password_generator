@@ -25,6 +25,6 @@ COPY . /code
 ENV SECRET_KEY "HcyHeNTropOt3ANlWa4scb9LQ7FE2rJey8SLbFrPSrTQXF5Bp0"
 RUN python manage.py collectstatic --noinput
 
-EXPOSE 8000
+EXPOSE 8080
 
-CMD ["gunicorn","--bind",":8000","--workers","2","--worker-class","uvicorn.workers.UvicornWorker","backend.asgi"]
+CMD ["gunicorn","--bind",":8080","--workers","2","--worker-class","uvicorn.workers.UvicornWorker","backend.asgi"]
